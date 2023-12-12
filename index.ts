@@ -2,7 +2,10 @@ const server = Bun.serve({
     // port:process.env.PORT||4000,
     port:Bun.env.PORT||4000,
     fetch(req){
-        return new Response('Hello world via bun')
+      const url = new URL(req.url)
+      if(url.pathname=='/') return new Response('HomePage!');
+      if(url.pathname=='/blog') return new Response('BlogPage!');
+      return new Response('404')
     }
 })
 
